@@ -35,14 +35,15 @@ export default function Products() {
 
     fetchData();
   }, []);
+
   return (
-    <div className="container mx-auto px-4 py-8 md:px-6 lg:px-8">
+    <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 text-center mb-8 tracking-tight">
         Discover Our Collection of{" "}
-        <span className="text-pink-600">Products</span>
+        <span className="text-[#F9550E]">Products</span>
       </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {data.map((product) => (
           <div
             key={product.id}
@@ -65,7 +66,7 @@ export default function Products() {
               <p className="text-pink-700 text-xl font-extrabold mt-auto">
                 ${product.price.toFixed(2)}
               </p>
-              <button className="mt-4 w-full bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50">
+              <button className="mt-4 w-full bg-[#2099E2] text-white py-2 px-4 rounded-lg hover:bg-pink-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50">
                 View Details
               </button>
             </div>

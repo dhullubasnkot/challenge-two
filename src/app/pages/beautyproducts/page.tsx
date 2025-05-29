@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Navbar from "@/app/component/navbar";
 
 type Product = {
   id: number;
@@ -11,33 +12,25 @@ type Product = {
 
 export default function Products() {
   const [data, setData] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-        const response = await fetch(
-          "https://dummyjson.com/products/category/beauty"
-        );
-        if (!response.ok) {
-          throw new Error(`Failed to fetch data: ${response.statusText}`);
-        }
+        const response = await fetch("https://dummyjson.com/products");
+        if (!response.ok) throw new Error("Failed to fetch data");
 
         const res = await response.json();
         const products: Product[] = res.products;
-        setData(products);
+        const filtered = products.filter(
+          (product) => product.id >= 1 && product.id <= 20
+        );
+        setData(filtered);
       } catch (err) {
         if (err instanceof Error) {
-          setError(err.message);
           console.error("Error fetching data:", err.message);
         } else {
-          setError("An unknown error occurred.");
           console.error("Unknown error fetching data:", err);
         }
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -45,39 +38,15 @@ export default function Products() {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-8 md:px-6 lg:px-8">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 text-center mb-8 tracking-tight">
-        Discover Our Collection of{" "}
-        <span className="text-pink-600">Products</span>
-      </h1>
+    <>
+      <Navbar />
+      <div className="container mx-auto px-4 py-8 md:px-6 lg:px-8">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 text-center mb-8 tracking-tight">
+          Discover Our Collection of{" "}
+          <span className="text-pink-600"> Beauty Products</span>
+        </h1>
 
-      {loading && (
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-pink-500"></div>
-        </div>
-      )}
-
-      {error && (
-        <div
-          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center"
-          role="alert"
-        >
-          <strong className="font-bold">Error:</strong>{" "}
-          <span className="block sm:inline">{error}</span>
-          <p className="text-sm mt-2">
-            Please try refreshing the page or check your internet connection.
-          </p>
-        </div>
-      )}
-
-      {!loading && !error && data.length === 0 && (
-        <div className="text-center text-gray-600 text-lg py-10">
-          No beauty products found.
-        </div>
-      )}
-
-      {!loading && !error && data.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {data.map((product) => (
             <div
               key={product.id}
@@ -107,7 +76,7 @@ export default function Products() {
             </div>
           ))}
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }

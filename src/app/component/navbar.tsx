@@ -1,6 +1,6 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { FaSearch, FaBars } from "react-icons/fa";
 
 export default function Navbar() {
   return (
@@ -9,22 +9,25 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <Image
             src="/logo.png"
-            alt="EduPress Text Logo"
-            width={166}
+            alt="EduPress Logo"
+            width={160}
             height={30}
-            className="w-auto h-[70px]"
+            className="h-[40px] sm:h-[50px] md:h-[60px] lg:h-[70px] w-auto"
           />
         </div>
 
-        <nav className="hidden md:flex items-center gap-6 text-black font-medium">
+        <nav className="flex items-center gap-4 text-sm sm:text-base md:text-lg font-medium">
           <Link href="/" className="text-orange-500 hover:underline">
             Home
           </Link>
 
           <div className="relative group">
             <button className="hover:text-orange-500">Products ▾</button>
-            <div className="absolute hidden group-hover:block bg-white shadow-md mt-2 rounded p-2 z-10">
-              <Link href="/about" className="block px-4 py-1 hover:bg-gray-100">
+            <div className="absolute hidden group-hover:block bg-white shadow-md mt-2 rounded p-2 z-10 w-40 text-sm">
+              <Link
+                href="/pages/beautyproducts"
+                className="block px-4 py-1 hover:bg-gray-100"
+              >
                 Beauty
               </Link>
               <Link
@@ -44,46 +47,6 @@ export default function Navbar() {
           >
             Contact / Login
           </Link>
-          <div className="flex items-center justify-center rounded-full border-[#F9550E] border-2 h-12 w-12">
-            <FaSearch className="text-[#2099E2] cursor-pointer h-5 w-5" />
-          </div>
-        </div>
-
-        <div className="md:hidden">
-          <label htmlFor="mobile-menu" className="cursor-pointer">
-            <FaBars className="h-6 w-6 text-orange-500" />
-          </label>
-        </div>
-      </div>
-      {/* mobile menu */}
-      <input type="checkbox" id="mobile-menu" className="peer hidden" />
-      <div className="peer-checked:flex hidden flex-col items-start gap-4 px-6 pb-4 bg-white shadow-md md:hidden">
-        <Link href="/" className="text-orange-500 font-medium">
-          Home
-        </Link>
-
-        <div className="font-medium">
-          <span className="block">Products</span>
-          <div className="ml-4">
-            <Link
-              href="/about"
-              className="block text-sm text-gray-600 hover:text-orange-500"
-            >
-              Beauty
-            </Link>
-            <Link
-              href="/contact"
-              className="block text-sm text-gray-600 hover:text-orange-500"
-            >
-              Fragrance
-            </Link>
-          </div>
-        </div>
-        <Link href="/login" className="font-medium text-black">
-          Contact / Login
-        </Link>
-        <div className="flex items-center justify-center rounded-full border-[#F9550E] border-2 h-12 w-12">
-          <FaSearch className="text-[#2099E2] cursor-pointer h-5 w-5" />
         </div>
       </div>
     </header>
