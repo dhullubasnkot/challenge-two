@@ -16,13 +16,15 @@ export default function Products() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://dummyjson.com/products");
+        const response = await fetch(
+          "https://dummyjson.com/products/category/beauty"
+        );
         if (!response.ok) throw new Error("Failed to fetch data");
 
         const res = await response.json();
         const products: Product[] = res.products;
         const filtered = products.filter(
-          (product) => product.id >= 1 && product.id <= 20
+          (product) => product.id >= 1 && product.id <= 5
         );
         setData(filtered);
       } catch (err) {

@@ -49,12 +49,11 @@ export default function Products() {
             key={product.id}
             className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col"
           >
-            <div className="relative w-full h-56 bg-gray-100 flex items-center justify-center">
+            <div className="relative w-full h-56  flex items-center justify-center">
               <Image
                 src={product.images[0] || "/placeholder.jpg"}
                 alt={product.title}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
                 style={{ objectFit: "contain" }}
                 className="transition-transform duration-300 hover:scale-105"
               />
